@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
  */
 public class Day131
 {
-    private static Comparator<? super Pair<Integer, Integer>> waitTimeComp = (Comparator<Pair<Integer, Integer>>) (pair, t1) -> Integer.compare(pair.getRight(), t1.getRight());
+    private static final Comparator<? super Pair<Integer, Integer>> waitTimeComp = Comparator.comparingInt(Pair<Integer, Integer>::getRight);
 
     public static void main(String[] args)
     {
@@ -32,7 +32,7 @@ public class Day131
                 int waitTime = busID-(timestamp % busID);
                 return Pair.of(busID, waitTime);
             };
-            Pair<Integer, Integer> bus = Arrays.stream(lines.get(1).split(",")).filter(b->!b.equals("x")).map(Integer::parseInt).map(waitCalc).sorted(waitTimeComp).findFirst().get();
+            Pair<Integer, Integer> bus = Arrays.stream(lines.get(1).split(",")).filter(b -> !b.equals("x")).map(Integer::parseInt).map(waitCalc).min(waitTimeComp).orElseThrow();
             System.out.println(bus.getLeft()+"/"+bus.getRight()+"/"+ bus.getLeft()*bus.getRight());
         }
         catch (IOException e)
