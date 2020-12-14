@@ -20,14 +20,7 @@ import java.util.stream.Collectors;
  */
 public class Day131
 {
-    private static Comparator<? super Pair<Integer, Integer>> waitTimeComp = new Comparator<Pair<Integer, Integer>>()
-    {
-        @Override
-        public int compare(final Pair<Integer, Integer> pair, final Pair<Integer, Integer> t1)
-        {
-            return Integer.compare(pair.getRight(), t1.getRight());
-        }
-    };
+    private static Comparator<? super Pair<Integer, Integer>> waitTimeComp = (Comparator<Pair<Integer, Integer>>) (pair, t1) -> Integer.compare(pair.getRight(), t1.getRight());
 
     public static void main(String[] args)
     {
